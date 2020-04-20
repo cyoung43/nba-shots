@@ -8,6 +8,7 @@ import FooterContainer from './footer'
 import Home from './home'
 import About from './about'
 import Calculator from './calculator'
+import PicContainer from './picture'
 import './App.scss'
 
 function App() {
@@ -16,8 +17,13 @@ function App() {
     <Router>
       <bs.Container fluid className="p-0 min-vh-100 d-flex flex-column">
         <bs.Row noGutters className="flex-grow-0 flex-shrink-0 shadow-sm">
-          <bs.Col style={{backgroundColor: "#eeffe6"}}>
+          <bs.Col>
             <HeaderContainer />
+          </bs.Col>
+        </bs.Row>
+        <bs.Row>
+          <bs.Col>
+            <PicContainer />
           </bs.Col>
         </bs.Row>
         <bs.Row noGutters className="flex-grow-1">
@@ -42,7 +48,7 @@ function App() {
           </bs.Col>
         </bs.Row>
         <bs.Row className="no-gutters">
-          <bs.Col style={{backgroundColor: "#eeffe6"}}>
+          <bs.Col style={{backgroundColor: "#88c1ff"}}>
             <FooterContainer />
           </bs.Col>
         </bs.Row>
