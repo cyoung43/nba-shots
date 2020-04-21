@@ -9,7 +9,7 @@ function CalculatorController(props) {
     let context = React.useContext(AppContext)
     let myError = ''
 
-    return (
+    return (        
         <Formik
             initialValues={{
                 title: 'Donate Money to Find Covid-19 Cure Today!!',
@@ -128,7 +128,7 @@ function CalculatorController(props) {
             }}
         >{form => (
             <CalculatorForm form={form} error={myError} results={context.result} text1={context.recommendation1}/>            
-        )}</Formik>
+        )}</Formik>        
     )
 }
 export default CalculatorController
@@ -141,10 +141,9 @@ export default CalculatorController
 const CalculatorForm = props => (
     
     <bs.Container>
-        <br />
-        <h1 style={{
-            display: 'inline-block'
-        }}>Campaign Success Calculator</h1>
+        <h1 className="pt-4" style={{display: 'inline-block'}}>
+            Campaign Success Calculator
+        </h1>
         <hr />
         <h6 className="text-danger">{props.error}</h6> 
         <Form>
@@ -197,7 +196,7 @@ const CalculatorForm = props => (
                     </bs.Card>
                     <br />
                     <bs.Container className="text-center">
-                        <bs.Button className="btn btn-lg btn-success" type="submit" disabled={props.form.isSubmitting}>
+                        <bs.Button className="btn btn-lg btn-primary" type="submit" disabled={props.form.isSubmitting}>
                             {props.form.isSubmitting &&
                                 <bs.Spinner as="span" animation="grow" size="lg" role="status" aria-hidden="true" />                     
                             } Calculate
