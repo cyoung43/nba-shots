@@ -6,9 +6,17 @@ function About(props) {
         <bs.Container>
             <bs.Row>
                 <bs.Col>
-                    <br />
-                    <p className="text-center">About Us</p>
-                    <p className="text-center">GoFundMe Analytics is dedicated to making your campaign successful. Use our calculator to see predictions of how your campaign will turn out. Then, based on the result, see how you can improve your campaign to maximize the number of donors and the average amount donated. We want to help you change the world by creating out of this world campaigns for the causes that actually mean something to you!</p>
+                    <bs.Card.Body>
+                        <bs.Card.Title className='text-center mt-3' style={{fontSize: '32pt'}}>
+                            About Us
+                        </bs.Card.Title>
+                        <hr />
+                        <bs.Card.Text className='text-center mb-3' style={{fontSize: '20pt'}}>
+                            Have you ever wondered what it is like to shoot in a real NBA game? Well we will simulate that experience for you!
+                            Just enter the given information and we will tell you how likely you are to make a shot! With the time running down
+                            in the fourth quarter will you make the game winning shot? Let's find out!
+                        </bs.Card.Text>
+                    </bs.Card.Body>
                 </bs.Col>
             </bs.Row>
         </bs.Container>

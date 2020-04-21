@@ -3,12 +3,8 @@ import * as bs from 'react-bootstrap'
 
 function FooterContainer(props) {
     return (
-        <bs.Container>
-            <bs.Row>
-                <bs.Col>
-                    <p className="text-center">{'\u00A9'} Go Fund Me Analytics</p>
-                </bs.Col>
-            </bs.Row>
+        <bs.Container bg="dark" className="text-center" style={{color: 'white'}}>            
+            <h6>{'\u00A9'} Go Fund Me Analytics</h6>
         </bs.Container>
     )
 }
