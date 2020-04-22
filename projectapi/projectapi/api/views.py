@@ -23,7 +23,7 @@ import pyodbc
 
 ########################## AZURE VIEWS ########################
 @csrf_exempt
-def runML(scoring_uri, key, input):
+def runModel(scoring_uri, key, input):
     # Two sets of data to score, so we get two results back
     data = {
         "Inputs": {
@@ -54,26 +54,26 @@ def getShotPrediction(request):
 
     stuff = json.loads(request.body)
 
-    location = stuff['LOCATION']
-    shot_number = stuff['SHOT_NUMBER']
-    period = stuff['PERIOD']
-    shot_clock = stuff['SHOT_CLOCK']
-    dribbles = stuff['DRIBBLES']
-    shot_distance = stuff['SHOT_DISTANCE']
-    pts_type = stuff['PTS_TYPE']
-    close_def_dist = stuff['CLOSE_DEF_DIST']
-    game_clock = stuff['GAME_CLOCK']
-    fg = stuff['FG']
-    experience = stuff['EXPERIENCE']
-    player_first = 'TEST-last'
-    player_last = 'TEST-first'
+    location = stuff['location']
+    shot_number = stuff['shot_number']
+    period = stuff['period']
+    shot_clock = stuff['shot_clock']
+    dribbles = stuff['dribbles']
+    shot_distance = stuff['shot_distance']
+    pts_type = stuff['pts_type']
+    close_def_dist = stuff['close_def_dist']
+    game_clock = stuff['game_clock']
+    fg = stuff['fg']
+    experience = stuff['experience']
+    player_first = stuff['player_first']
+    player_last = stuff['player_last']
 
     shotsInputs = {
         "ColumnNames": ["location", "shot_number", "period", "shot_clock", "dribbles", "shot_distance", "pts_type", "close_def_dist", "game_clock", "fg", "experience"],
         "Values": [[location, shot_number, period, shot_clock, dribbles, shot_distance, pts_type, close_def_dist, game_clock, fg, experience], ]
     }
 
-    shot_prediction = str(runML(shotURL, shotKey, shotInputs))
+    shot_prediction = str(runModel(shotURL, shotKey, shotInputs))
 
     # SAVE RESULTS TO DB
     server = 'final-project-415.database.windows.net'
@@ -110,7 +110,7 @@ def getPlayerRecommendation(request):
         "Values": [[full_name], ]
     }
 
-    player_recommendations = str(
-        round(float(runML(playersURL, playersKey, playersInputs))))
+    player_recommendation = str(
+        runModel(playersURL, playersKey, playersInputs))
 
-    return Response({"result": player_recommendations})
+    return Response({"result": player_recommendation})
