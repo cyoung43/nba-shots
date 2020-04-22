@@ -49,8 +49,8 @@ def runModel(scoring_uri, key, input):
 @api_view(['GET', 'POST', ])
 def getShotPrediction(request):
 
-    shotsURL = 'https://ussouthcentral.services.azureml.net/workspaces/e7626090de274eec971d136acbc67e67/services/ed1ee599e573413bb3961627ee44eb89/execute?api-version=2.0&details=true'
-    shotsKey = 'H1hkxnUbil+UYJmXPQ2bzA7BB6n5n6gCdt9SLE+jAzgxuITlFvHIBw/hpqKF7FnTVigsLH1RnE/5ELMWtgL22g=='
+    shotURL = 'https://ussouthcentral.services.azureml.net/workspaces/e7626090de274eec971d136acbc67e67/services/ed1ee599e573413bb3961627ee44eb89/execute?api-version=2.0&details=true'
+    shotKey = 'H1hkxnUbil+UYJmXPQ2bzA7BB6n5n6gCdt9SLE+jAzgxuITlFvHIBw/hpqKF7FnTVigsLH1RnE/5ELMWtgL22g=='
 
     stuff = json.loads(request.body)
 
@@ -68,7 +68,7 @@ def getShotPrediction(request):
     player_first = stuff['player_first']
     player_last = stuff['player_last']
 
-    shotsInputs = {
+    shotInputs = {
         "ColumnNames": ["location", "shot_number", "period", "shot_clock", "dribbles", "shot_distance", "pts_type", "close_def_dist", "game_clock", "fg", "experience"],
         "Values": [[location, shot_number, period, shot_clock, dribbles, shot_distance, pts_type, close_def_dist, game_clock, fg, experience], ]
     }
