@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c21b7407.chunk.css",
+    "main.js": "/static/js/main.f4766d82.chunk.js",
+    "main.js.map": "/static/js/main.f4766d82.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f28e8818.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f28e8818.js.map",
+    "static/css/2.b0ba97fb.chunk.css": "/static/css/2.b0ba97fb.chunk.css",
+    "static/js/2.80fb60a3.chunk.js": "/static/js/2.80fb60a3.chunk.js",
+    "static/js/2.80fb60a3.chunk.js.map": "/static/js/2.80fb60a3.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.3c609e8b829a4695d735afd129b9a5a5.js": "/precache-manifest.3c609e8b829a4695d735afd129b9a5a5.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.b0ba97fb.chunk.css.map": "/static/css/2.b0ba97fb.chunk.css.map",
+    "static/css/main.c21b7407.chunk.css.map": "/static/css/main.c21b7407.chunk.css.map",
+    "static/js/2.80fb60a3.chunk.js.LICENSE.txt": "/static/js/2.80fb60a3.chunk.js.LICENSE.txt",
+    "static/media/Basketball_3.jpg": "/static/media/Basketball_3.b360f230.jpg",
+    "static/media/basketball_icon.png": "/static/media/basketball_icon.2bfb11da.png",
+    "static/media/all.css": "/static/media/fa-solid-900.ec763292.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f28e8818.js",
+    "static/css/2.b0ba97fb.chunk.css",
+    "static/js/2.80fb60a3.chunk.js",
+    "static/css/main.c21b7407.chunk.css",
+    "static/js/main.f4766d82.chunk.js"
+  ]
+}
