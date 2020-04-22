@@ -108,7 +108,19 @@ function Predictor(props) {
                     console.log(err)
                 }
                 //console.log('RESPONSE 1:', calcResp.data)
-                context.addResult(calcResp)
+                let result = ''
+                if (calcResp.data > 0.5) {
+                    result = 'success'
+                }
+                else {
+                    result = 'danger'
+                }
+
+                let dict2 = {
+                    result: calcResp.data,
+                    type: result
+                }
+                context.addResult(dict2)
 
                 await new Promise(resolve => {
                     setTimeout(() => {  // wait 2 seconds, then set the form as "not submitting"
