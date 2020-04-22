@@ -13,12 +13,13 @@ export default class AppProvider extends React.Component {
             // Functions Here
             addShot: this.addShot,
             addPlayer: this.addPlayer,
+            clearPlayers: this.clearPlayers,
         }
         this.state = {
             // Attributes here
             calcCart: [],
-            shot: [{result: 75.35, type: 'info'}],
-            players : [{name: 'Kevin Durant', ppg: 15, rpg: 8, apg: 4, other: '???'}, {name: 'Steph Curry', ppg: 25, rpg: 6, apg: 8, other: '???'}, {name: 'Donovan Mitchell', ppg: 30, rpg: 15, apg: 15, other: '???'}],
+            shot: [{result: 0, type: 'info'}],
+            players : [{name: 'Yoeli Childs', ppg: 15, rpg: 8, apg: 4, per: 27.67}],
         }
         // Do not load data (the categories) here or else it would freeze the system
     }
@@ -32,11 +33,16 @@ export default class AppProvider extends React.Component {
         }))
     }
 
+    clearPlayers = () => {        
+        this.setState(state => produce(state, draft => {
+            draft.players = []            
+        }))
+    }
+
     addPlayer = (results) => {
         let newRes = results
         this.setState(state => produce(state, draft => {
-            draft.players.shift()            
-            draft.players.unshift(newRes)
+            draft.players.push(newRes)
         }))
     }
   
