@@ -22,7 +22,7 @@ function Predictor(props) {
                 close_def_dist: 1.8,
                 minutes: 9,
                 seconds: 46,
-                fg: 78.18,
+                fg: 78.1,
                 experience: '5',
             }}
             validateOnChange={false}
@@ -117,7 +117,7 @@ function Predictor(props) {
                 })
             }}
         >{form => (
-            <CalculatorForm form={form} error={myError} results={context.result}/>            
+            <CalculatorForm form={form} error={myError} results={context.shot}/>            
         )}</Formik>        
     )
 }
@@ -153,7 +153,7 @@ const CalculatorForm = props => (
                             <Input title="Seconds:" name="seconds" type="number" min="0" max="59" step="1"/>
                         </bs.Col>
                     </bs.Row>
-                    <Input title="Time left on shot clock:" name="shot_clock" type="number" min="0.1" max="24.0" step="0.1"/>
+                    <Input title="Time Left on Shot Clock:" name="shot_clock" type="number" min="0.1" max="24.0" step="0.1"/>
                     <InputDrop title="Years in the NBA:" name="experience" type="select" val0="" lab0="Select Year" 
                         val1="R" lab1="Rookie" val2="2" lab2="2" val3="3" lab3="3" val4="4" lab4="4" val5="5" lab5="5" val6="6" lab6="6"
                         val7="7" lab7="7" val8="8" lab8="8" val9="9" lab9="9" val10="10" lab10="10"
@@ -164,15 +164,15 @@ const CalculatorForm = props => (
                 <bs.Col md="6">
                     <Input title="Shot Number:" name="shot_number" type="number" />
 
-                    <Input title="Number of dribbles before shot:" name="dribbles" type="number" />
+                    <Input title="Number of Dribbles Before Shot:" name="dribbles" type="number" />
 
-                    <Input title="Shot Distance (feet):" name="shot_distance" type="number" min="0" max="94" step="0.01" />
+                    <Input title="Shot Distance (feet):" name="shot_distance" type="number" min="0" max="94" step="0.1" />
 
                     <Input name="pts_type" type="hidden" value='2'/>
 
-                    <Input title="Player Fieldgoal precentage:" name="fg" type="number" min="0" max="100" step="0.01"/>
+                    <Input title="Player Field Goal Percentage:" name="fg" type="number" min="0" max="100" step="0.1"/>
 
-                    <Input title="Distance to closest defender (feet):" name="close_def_dist" type="number" min="0" max="94" step="0.01" />                    
+                    <Input title="Distance to Closest Defender (feet):" name="close_def_dist" type="number" min="0" max="94" step="0.1" />                    
                 </bs.Col>
             </bs.Row>
             <bs.Row className="mb-4">
@@ -187,8 +187,40 @@ const CalculatorForm = props => (
                 </bs.Col>
             </bs.Row>
             <bs.Row className="mb-4">
-                <bs.Col>
-                    <h1>Results Here</h1>
+                <bs.Col className="text-center">
+                    {props.results.map((p) => {
+                        if (p.type === 'success') {
+                            return(
+                                <bs.Alert variant="success">
+                                    <bs.Alert.Heading>Buckets! It went in!</bs.Alert.Heading>
+                                    <p className="mb-1">The player that you have described taking this shot is probably going to make it!</p> 
+                                    <p>Now try and mix up the stats to see if you can improve your percentage!</p>
+                                    <hr />
+                                    <p>This shot has a <strong>{p.result}</strong> percent chance to be a make!</p>
+                                </bs.Alert>
+                            )
+                        }
+                        if (p.type === 'danger') {
+                            return(
+                                <bs.Alert variant="danger">
+                                    <bs.Alert.Heading>Brick! This shot missed...</bs.Alert.Heading>
+                                    <p className="mb-1">This is a really tough shot and it will probably be a miss. But dont give up!</p>
+                                    <p>Change up the situation and the stats and maybe you can find the right combination!</p>
+                                    <hr />
+                                    <p>This shot only has a <strong>{p.result}</strong> percent chance to be a make.</p>
+                                </bs.Alert>
+                            )
+                        }
+                        
+                        return(
+                            <bs.Alert variant="info">
+                                <bs.Alert.Heading>Enter the Info Above to View Results</bs.Alert.Heading>
+                                <p className="mb-1">We will display your results here!</p> 
+                                <hr />
+                                <p>This shot has a <strong>{p.result}</strong> percent chance to be a make!</p>
+                            </bs.Alert>
+                        )
+                    })}
                 </bs.Col>
             </bs.Row>
         </Form>       
