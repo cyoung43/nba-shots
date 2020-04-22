@@ -194,3 +194,46 @@ def getExpectedNumDonorsRegular(request): # Corona Virus Related
     return Response({"result": {"expected_donors": expected_num_donors, "expected_donation": expected_avg_donation}})
     
     #render(request, "campaign-calculator-container.js", {"result": {"expected_donors": expected_num_donors, "expected_donation": expected_avg_donation}})
+
+
+
+
+
+import pyodbc
+
+server = 'final-project-415.database.windows.net'
+database = 'nba-data'
+username = 'admin415'
+password = '415@data'
+driver = 'ODBC Driver 17 for SQL Server'
+cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server +
+                      ';PORT=1433;DATABASE='+database+';UID='+username+';PWD=' + password)
+cursor = cnxn.cursor()
+# cursor.execute("SELECT * FROM cleaned_stats")
+# row = cursor.fetchone()
+
+LOCATION = 'TEST'
+SHOT_NUMBER = 99
+PERIOD = 'TEST'
+SHOT_CLOCK = 22.22
+DRIBBLES = 99
+SHOT_DISTANCE = 99.99
+PTS_TYPE = 'TEST'
+CLOSE_DEF_DIST = 99.99
+game_clock = 99
+FG = 99.99
+Experience = 'TEST'
+SHOT_RESULT = 0
+player_first = 'TEST-last'
+player_last = 'TEST-first'
+
+# cursor.execute("insert into products(id, name) values (?, ?)", 'pyodbc', 'awesome library')
+
+# Insert some data into table
+cursor.execute(
+    f"INSERT INTO Shot_Prediction(location, SHOT_NUMBER, PERIOD, SHOT_CLOCK, DRIBBLES, SHOT_DIST, PTS_TYPE, CLOSE_DEF_DIST, game_clock, FG, Experience, SHOT_RESULT, player_first, player_last) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", LOCATION, SHOT_NUMBER, PERIOD, SHOT_CLOCK, DRIBBLES, SHOT_DISTANCE, PTS_TYPE, CLOSE_DEF_DIST, game_clock, FG, Experience, SHOT_RESULT, player_first, player_last)
+
+# Cleanup
+cnxn.commit()
+cursor.close()
+cnxn.close()
