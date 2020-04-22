@@ -11,7 +11,6 @@ export default class AppProvider extends React.Component {
         super(props)
         this.actions = {
             // Functions Here
-            calcCartAdd: this.calcCartAdd,
             addShot: this.addShot,
             addPlayer: this.addPlayer,
         }
@@ -38,15 +37,6 @@ export default class AppProvider extends React.Component {
         this.setState(state => produce(state, draft => {
             draft.players.shift()            
             draft.players.unshift(newRes)
-        }))
-    }
-
-    calcCartAdd = (search) => {
-        this.setState(state => produce(state, draft => {
-            if (draft.calcCart.length >= 3) {
-                draft.calcCart.shift()
-            }
-            draft.calcCart.unshift(search)
         }))
     }
   
