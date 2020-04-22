@@ -74,7 +74,7 @@ function Predictor(props) {
                 return errors // This is the way
             }}
             onSubmit={async (values, actions) => {
-                console.log('submit', values)             
+                //console.log('submit', values)             
 
                 if (values.shot_distance > 23.75) {
                     values.pts_type = '3'
@@ -96,19 +96,19 @@ function Predictor(props) {
                     experience: values.experience,
                 }
 
-                console.log(dict)
-                console.log('player_first ', dict.player_first, typeof dict.player_first)
-                console.log('player_last ', dict.player_last, typeof dict.player_last)
-                console.log('location ', dict.location, typeof dict.location)
-                console.log('shot_number ', dict.shot_number, typeof dict.shot_number)
-                console.log('period ', dict.period, typeof dict.period)
-                console.log('shot_clock ', dict.shot_clock, typeof dict.shot_clock)
-                console.log('shot_distance ', dict.shot_distance, typeof dict.shot_distance)
-                console.log('pts_type ', dict.pts_type, typeof dict.pts_type)
-                console.log('close_def_dist ', dict.close_def_dist, typeof dict.close_def_dist)
-                console.log('game_clock ', dict.game_clock, typeof dict.game_clock)
-                console.log('fg ', dict.fg, typeof dict.fg)
-                console.log('experience ', dict.experience, typeof dict.experience)
+                // console.log(dict)
+                // console.log('player_first ', dict.player_first, typeof dict.player_first)
+                // console.log('player_last ', dict.player_last, typeof dict.player_last)
+                // console.log('location ', dict.location, typeof dict.location)
+                // console.log('shot_number ', dict.shot_number, typeof dict.shot_number)
+                // console.log('period ', dict.period, typeof dict.period)
+                // console.log('shot_clock ', dict.shot_clock, typeof dict.shot_clock)
+                // console.log('shot_distance ', dict.shot_distance, typeof dict.shot_distance)
+                // console.log('pts_type ', dict.pts_type, typeof dict.pts_type)
+                // console.log('close_def_dist ', dict.close_def_dist, typeof dict.close_def_dist)
+                // console.log('game_clock ', dict.game_clock, typeof dict.game_clock)
+                // console.log('fg ', dict.fg, typeof dict.fg)
+                // console.log('experience ', dict.experience, typeof dict.experience)
 
 
                 // Put axios call to API here:
@@ -119,19 +119,21 @@ function Predictor(props) {
                 catch(err) {
                     console.log(err)
                 }
-                //console.log('RESPONSE 1:', calcResp.data)
-                let result = ''
-                if (calcResp.data > 0.5) {
-                    result = 'success'
+                
+                console.log('RESPONSE 1:', calcResp.data)
+                let results = ''
+                if (calcResp.data.result > 0.5) {
+                    results = 'success'
                 }
                 else {
-                    result = 'danger'
+                    results = 'danger'
                 }
 
                 let dict2 = {
-                    result: calcResp.data,
-                    type: result
+                    result: calcResp.data.result,
+                    type: results
                 }
+                //console.log(dict2)
                 context.addShot(dict2)
 
                 await new Promise(resolve => {
@@ -191,7 +193,7 @@ const CalculatorForm = props => (
                     <InputDrop title="Years in the NBA:" name="experience" type="select" val0="" lab0="Select Year" 
                         val1="R" lab1="Rookie" val2="2" lab2="2" val3="3" lab3="3" val4="4" lab4="4" val5="5" lab5="5" val6="6" lab6="6"
                         val7="7" lab7="7" val8="8" lab8="8" val9="9" lab9="9" val10="10" lab10="10"
-                        val11="11" lab11="1" val12="12" lab12="12" val13="13" lab13="13" val14="14" lab14="14" val15="15" lab15="15" val16="16" lab16="16"
+                        val11="11" lab11="11" val12="12" lab12="12" val13="13" lab13="13" val14="14" lab14="14" val15="15" lab15="15" val16="16" lab16="16"
                         val17="17" lab17="17" val18="18" lab18="18" val19="19" lab19="19" val20="20" lab20="20+"
                     />                    
                     <bs.Row>
@@ -222,35 +224,35 @@ const CalculatorForm = props => (
             <bs.Row className="mb-4">
                 <bs.Col className="text-center">
                     {props.results.map((p) => {
-                        if (p.type === 'success') {
+                        if (p.type === 'success') {                            
                             return(
-                                <bs.Alert variant="success">
+                                <bs.Alert variant="success" key={p.result}>
                                     <bs.Alert.Heading>Buckets! It went in!</bs.Alert.Heading>
                                     <p className="mb-1">The player that you have described taking this shot is probably going to make it!</p> 
                                     <p>Now try and mix up the stats to see if you can improve your percentage!</p>
                                     <hr />
-                                    <p>This shot has a <strong>{p.result}</strong> percent chance to be a make!</p>
+                                    <p>This shot has a <strong>{(p.result * 100).toFixed(2)}%</strong> chance to be a make!</p>
                                 </bs.Alert>
                             )
                         }
                         if (p.type === 'danger') {
                             return(
-                                <bs.Alert variant="danger">
+                                <bs.Alert variant="danger" key={p.result}>
                                     <bs.Alert.Heading>Brick! This shot missed...</bs.Alert.Heading>
                                     <p className="mb-1">This is a really tough shot and it will probably be a miss. But dont give up!</p>
                                     <p>Change up the situation and the stats and maybe you can find the right combination!</p>
                                     <hr />
-                                    <p>This shot only has a <strong>{p.result}</strong> percent chance to be a make.</p>
+                                    <p>This shot only has a <strong>{(p.result * 100).toFixed(2)}%</strong> chance to be a make.</p>
                                 </bs.Alert>
                             )
                         }
                         
                         return(
-                            <bs.Alert variant="info">
+                            <bs.Alert variant="info" key={p.result}>
                                 <bs.Alert.Heading>Enter the Info Above to View Results</bs.Alert.Heading>
                                 <p className="mb-1">We will display your results here!</p> 
                                 <hr />
-                                <p>This shot has a <strong>{p.result}</strong> percent chance to be a make!</p>
+                                <p>This shot has a <strong>{(p.result * 100).toFixed(2)}%</strong> chance to be a make!</p>
                             </bs.Alert>
                         )
                     })}

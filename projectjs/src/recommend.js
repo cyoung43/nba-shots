@@ -31,21 +31,63 @@ function Predictor(props) {
             onSubmit={async (values, actions) => {
                 console.log('submit', values)                
 
-                let dict = {
+                let data = {
                     Full_Name: values.fName.toLowerCase() + ' ' + values.lName.toLowerCase(),
                 }
                 
                 // Put axios call to API here:
                 let calcResp
                 try {
-                    calcResp = await axios.post(`http://localhost:8000/api/getPlayerRecommendation/`, JSON.stringify(dict))
+                    calcResp = await axios.post(`http://localhost:8000/api/getPlayerRecommendation/`, JSON.stringify(data))
+
+                    context.clearPlayers()
+
+                    let dict = {
+                        name: calcResp.data.player1,
+                        ppg: (calcResp.data.player1stats.points / calcResp.data.player1stats.games).toFixed(2),
+                        rpg: (calcResp.data.player1stats.rebounds / calcResp.data.player1stats.games).toFixed(2),
+                        apg: (calcResp.data.player1stats.assists / calcResp.data.player1stats.games).toFixed(2),
+                        per: (calcResp.data.player1stats.effeciency / calcResp.data.player1stats.games).toFixed(2),
+                    }
+                    
+                    context.addPlayer(dict)
+    
+                    let dict2 = {
+                        name: calcResp.data.player2,
+                        ppg: (calcResp.data.player2stats.points / calcResp.data.player2stats.games).toFixed(2),
+                        rpg: (calcResp.data.player2stats.rebounds / calcResp.data.player2stats.games).toFixed(2),
+                        apg: (calcResp.data.player2stats.assists / calcResp.data.player2stats.games).toFixed(2),
+                        per: (calcResp.data.player2stats.effeciency / calcResp.data.player2stats.games).toFixed(2),
+                    }
+                    
+                    context.addPlayer(dict2)
+                    
+                    let dict3 = {
+                        name: calcResp.data.player3,
+                        ppg: (calcResp.data.player3stats.points / calcResp.data.player3stats.games).toFixed(2),
+                        rpg: (calcResp.data.player3stats.rebounds / calcResp.data.player3stats.games).toFixed(2),
+                        apg: (calcResp.data.player3stats.assists / calcResp.data.player3stats.games).toFixed(2),
+                        per: (calcResp.data.player3stats.effeciency / calcResp.data.player3stats.games).toFixed(2),
+                    }
+                    
+                    context.addPlayer(dict3)
+
+                    let dict4 = {
+                        name: calcResp.data.player4,
+                        ppg: (calcResp.data.player4stats.points / calcResp.data.player4stats.games).toFixed(2),
+                        rpg: (calcResp.data.player4stats.rebounds / calcResp.data.player4stats.games).toFixed(2),
+                        apg: (calcResp.data.player4stats.assists / calcResp.data.player4stats.games).toFixed(2),
+                        per: (calcResp.data.player4stats.effeciency / calcResp.data.player4stats.games).toFixed(2),
+                    }
+                    
+                    context.addPlayer(dict4)
                 }
                 catch(err) {
-                    console.log(err)
+                    //console.log(err)
+                    myError = 'This player was not found in the 2014-2015 season data'
                 }
-                //console.log('RESPONSE 1:', calcResp.data)
+
                 
-                context.addPlayer(calcResp)
 
                 await new Promise(resolve => {
                     setTimeout(() => {  // wait 2 seconds, then set the form as "not submitting"
@@ -106,18 +148,18 @@ const CalculatorForm = props => (
                                 <th>PPG</th>
                                 <th>RPG</th>
                                 <th>APG</th>
-                                <th>Other</th>
+                                <th>PER</th>
                             </tr>
                         </thead>
                         <tbody>
                             {props.results.map((p) => {
                                 return(
-                                    <tr>
+                                    <tr key={p.name}>
                                         <td>{p.name}</td>
                                         <td>{p.ppg}</td>
                                         <td>{p.rpg}</td>
                                         <td>{p.apg}</td>
-                                        <td>{p.other}</td>
+                                        <td>{p.per}</td>
                                     </tr>
                                 )
                             })}

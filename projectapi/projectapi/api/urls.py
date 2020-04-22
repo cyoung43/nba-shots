@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from api import views
 from django.urls import path
-#from api.views import getExpectedAvgDonationCorona, getExpectedNumDonorsCorona, getExpectedAvgDonationRegular, getExpectedNumDonorsRegular
+from api.views import getShotPrediction, getPlayerRecommendation
 
 
 # Serializers define the API representation.
@@ -29,4 +29,7 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'getShotPrediction/', getShotPrediction, name='getShotPrediction'),
+    url(r'getPlayerRecommendation/', getPlayerRecommendation, name='getPlayerRecommendation'),
+
 ]
