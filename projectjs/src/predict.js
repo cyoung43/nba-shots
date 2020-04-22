@@ -12,6 +12,8 @@ function Predictor(props) {
     return (        
         <Formik
             initialValues={{
+                player_first: 'Yoeli',
+                player_last: 'Childs',
                 location: 'H',
                 shot_number: 7,
                 period: '4',
@@ -30,6 +32,12 @@ function Predictor(props) {
             validate={values => {
                 const errors = {}
 
+                if (values.player_first === '') {
+                    errors.player_first = 'Please enter a First Name'
+                }
+                if (values.player_last === '') {
+                    errors.player_last = 'Please enter a Last Name'
+                }
                 if (values.location === '') {
                     errors.location = 'Please enter Home or Away'
                 }
@@ -73,6 +81,8 @@ function Predictor(props) {
                 }
 
                 let dict = {
+                    player_first: values.player_first,
+                    player_last: values.player_last,
                     location: values.location,
                     shot_number: values.shot_number,
                     period: values.period,                    
@@ -87,6 +97,8 @@ function Predictor(props) {
                 }
 
                 console.log(dict)
+                console.log('player_first ', dict.player_first, typeof dict.player_first)
+                console.log('player_last ', dict.player_last, typeof dict.player_last)
                 console.log('location ', dict.location, typeof dict.location)
                 console.log('shot_number ', dict.shot_number, typeof dict.shot_number)
                 console.log('period ', dict.period, typeof dict.period)
@@ -102,7 +114,7 @@ function Predictor(props) {
                 // Put axios call to API here:
                 let calcResp
                 try {
-                    calcResp = await axios.post(`http://localhost:8000/api/predictor/`, JSON.stringify(dict))
+                    calcResp = await axios.post(`http://localhost:8000/api/getShotPrediction/`, JSON.stringify(dict))
                 }
                 catch(err) {
                     console.log(err)
@@ -120,7 +132,7 @@ function Predictor(props) {
                     result: calcResp.data,
                     type: result
                 }
-                context.addResult(dict2)
+                context.addShot(dict2)
 
                 await new Promise(resolve => {
                     setTimeout(() => {  // wait 2 seconds, then set the form as "not submitting"
@@ -151,6 +163,14 @@ const CalculatorForm = props => (
         <Form>
             <bs.Row className="mb-4">
                 <bs.Col md="6">
+                    <bs.Row>
+                        <bs.Col>
+                            <Input title="Player First Name:" name="player_first" type="text" />
+                        </bs.Col>
+                        <bs.Col>
+                            <Input title="Player Last Name:" name="player_last" type="text" />
+                        </bs.Col>
+                    </bs.Row>
                     <InputYN title="Home or Away:" name="location" type="select" val0="" lab0="Select One"
                         val1="H" val2="A" lab1="Home" lab2="Away" 
                     />
@@ -165,25 +185,26 @@ const CalculatorForm = props => (
                             <Input title="Seconds:" name="seconds" type="number" min="0" max="59" step="1"/>
                         </bs.Col>
                     </bs.Row>
-                    <Input title="Time Left on Shot Clock:" name="shot_clock" type="number" min="0.1" max="24.0" step="0.1"/>
+                    <Input title="Time Left on Shot Clock:" name="shot_clock" type="number" min="0.1" max="24.0" step="0.1"/>                    
+                </bs.Col>
+                <bs.Col md="6">
                     <InputDrop title="Years in the NBA:" name="experience" type="select" val0="" lab0="Select Year" 
                         val1="R" lab1="Rookie" val2="2" lab2="2" val3="3" lab3="3" val4="4" lab4="4" val5="5" lab5="5" val6="6" lab6="6"
                         val7="7" lab7="7" val8="8" lab8="8" val9="9" lab9="9" val10="10" lab10="10"
                         val11="11" lab11="1" val12="12" lab12="12" val13="13" lab13="13" val14="14" lab14="14" val15="15" lab15="15" val16="16" lab16="16"
                         val17="17" lab17="17" val18="18" lab18="18" val19="19" lab19="19" val20="20" lab20="20+"
-                    />
-                </bs.Col>
-                <bs.Col md="6">
-                    <Input title="Shot Number:" name="shot_number" type="number" />
-
-                    <Input title="Number of Dribbles Before Shot:" name="dribbles" type="number" />
-
+                    />                    
+                    <bs.Row>
+                        <bs.Col>
+                            <Input title="Shot Number:" name="shot_number" type="number" />
+                        </bs.Col>    
+                        <bs.Col>
+                            <Input title="Dribbles Before Shot:" name="dribbles" type="number" />
+                        </bs.Col>
+                    </bs.Row>
                     <Input title="Shot Distance (feet):" name="shot_distance" type="number" min="0" max="94" step="0.1" />
-
                     <Input name="pts_type" type="hidden" value='2'/>
-
                     <Input title="Player Field Goal Percentage:" name="fg" type="number" min="0" max="100" step="0.1"/>
-
                     <Input title="Distance to Closest Defender (feet):" name="close_def_dist" type="number" min="0" max="94" step="0.1" />                    
                 </bs.Col>
             </bs.Row>
