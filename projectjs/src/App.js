@@ -2,13 +2,11 @@ import React from 'react';
 import * as bs from 'react-bootstrap'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import HeaderContainer from './header'
-import LeftContainer from './left-container'
-import RightContainer from './right-container'
 import FooterContainer from './footer'
-import Home from './home'
 import About from './about'
-import Calculator from './calculator'
+import Predictor from './predict'
 import PicContainer from './picture'
+import Recommender from './recommend'
 import './App.scss'
 
 function App() {
@@ -26,29 +24,27 @@ function App() {
             <PicContainer />
           </bs.Col>
         </bs.Row>
-        <bs.Row noGutters className="flex-grow-1">
-          <bs.Col md="2" className="shadow-sm" style={{backgroundColor: "#FFFFFF"}}>
-            <LeftContainer />
+        <bs.Row noGutters style={{marginTop: "-120px"}}>
+          <bs.Col md="1" />
+          <bs.Col md="10">
+            <bs.Card className="shadow-lg mb-4" style={{borderRadius: "20px"}}>
+              <Switch>
+                <Route path="/about">
+                  <About />
+                </Route>
+                <Route path="/recommender">
+                  <Recommender />
+                </Route>
+                <Route path="/">
+                  <Predictor />                
+                </Route>
+              </Switch>
+            </bs.Card>
           </bs.Col>
-          <bs.Col md="8">
-            <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/campaign">
-                <Home />
-              </Route>
-              <Route path="/">
-                <Calculator />                
-              </Route>
-            </Switch>
-          </bs.Col>
-          <bs.Col md="2" className="shadow-sm" style={{backgroundColor: "#FFFFFF"}}>
-            <RightContainer />
-          </bs.Col>
+          <bs.Col md="1" />
         </bs.Row>
-        <bs.Row className="no-gutters">
-          <bs.Col style={{backgroundColor: "#88c1ff"}}>
+        <bs.Row noGutters>
+          <bs.Col className="py-2" style={{backgroundColor: "#343a40"}}>
             <FooterContainer />
           </bs.Col>
         </bs.Row>
