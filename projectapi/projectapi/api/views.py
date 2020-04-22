@@ -102,9 +102,9 @@ def getPlayerRecommendation(request): # Corona Virus Related
         "Values": [[full_name], ]
     }
 
-    expected_num_donors = str(
+    player_recommendations = str(
         round(float(runML(playersURL, playersKey, playersInputs))))
 
-    return Response({"result": {"expected_donors": expected_num_donors, "expected_donation": expected_avg_donation}})
+    return Response({"result": player_recommendations})
     
     #render(request, "campaign-calculator-container.js", {"result": {"expected_donors": expected_num_donors, "expected_donation": expected_avg_donation}})
