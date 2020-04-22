@@ -53,7 +53,7 @@ function Predictor(props) {
                 })
             }}
         >{form => (
-            <CalculatorForm form={form} error={myError} results={context.result}/>            
+            <CalculatorForm form={form} error={myError} results={context.players}/>            
         )}</Formik>        
     )
 }
@@ -98,20 +98,28 @@ const CalculatorForm = props => (
                     <h1>Results Here</h1>
                     <bs.Table striped bordered hover variant="dark">
                         <thead>
-                            <tr>
-                                <th>Player</th>
+                            <tr style={{color: "#ffc107"}}>
+                                <th >
+                                    Player
+                                </th>
+                                <th>PPG</th>
+                                <th>RPG</th>
+                                <th>APG</th>
+                                <th>Other</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Kevin Durant</td>
-                            </tr>
-                            <tr>
-                                <td>Steph Curry</td>
-                            </tr>
-                            <tr>
-                                <td>Donovan Mitchell</td>
-                            </tr>
+                            {props.results.map((p) => {
+                                return(
+                                    <tr>
+                                        <td>{p.name}</td>
+                                        <td>{p.ppg}</td>
+                                        <td>{p.rpg}</td>
+                                        <td>{p.apg}</td>
+                                        <td>{p.other}</td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </bs.Table>
                 </bs.Col>

@@ -12,22 +12,32 @@ export default class AppProvider extends React.Component {
         this.actions = {
             // Functions Here
             calcCartAdd: this.calcCartAdd,
-            addResult: this.addResult,
+            addShot: this.addShot,
+            addPlayer: this.addPlayer,
         }
         this.state = {
             // Attributes here
             calcCart: [],
-            result: [],
+            shot: [{result: 75.35, type: 'info'}],
+            players : [{name: 'Kevin Durant', ppg: 15, rpg: 8, apg: 4, other: '???'}, {name: 'Steph Curry', ppg: 25, rpg: 6, apg: 8, other: '???'}, {name: 'Donovan Mitchell', ppg: 30, rpg: 15, apg: 15, other: '???'}],
         }
         // Do not load data (the categories) here or else it would freeze the system
     }
     // Put Methods here
 
-    addResult = (results) => {
+    addShot = (results) => {
         let newRes = results
         this.setState(state => produce(state, draft => {
-            draft.result.shift()            
-            draft.result.unshift(newRes)
+            draft.shot.shift()            
+            draft.shot.unshift(newRes)
+        }))
+    }
+
+    addPlayer = (results) => {
+        let newRes = results
+        this.setState(state => produce(state, draft => {
+            draft.players.shift()            
+            draft.players.unshift(newRes)
         }))
     }
 
