@@ -38,13 +38,14 @@ function Predictor(props) {
                 // Put axios call to API here:
                 let calcResp
                 try {
-                    calcResp = await axios.post(`http://localhost:8000/api/predictor/`, JSON.stringify(dict))
+                    calcResp = await axios.post(`http://localhost:8000/api/getPlayerRecommendation/`, JSON.stringify(dict))
                 }
                 catch(err) {
                     console.log(err)
                 }
                 //console.log('RESPONSE 1:', calcResp.data)
-                context.addResult(calcResp)
+                
+                context.addPlayer(calcResp)
 
                 await new Promise(resolve => {
                     setTimeout(() => {  // wait 2 seconds, then set the form as "not submitting"
