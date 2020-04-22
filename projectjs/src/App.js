@@ -2,13 +2,11 @@ import React from 'react';
 import * as bs from 'react-bootstrap'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import HeaderContainer from './header'
-//import LeftContainer from './left-container'
-//import RightContainer from './right-container'
 import FooterContainer from './footer'
-//import Home from './home'
 import About from './about'
-import Calculator from './calculator'
+import Predictor from './predict'
 import PicContainer from './picture'
+import Recommender from './recommend'
 import './App.scss'
 
 function App() {
@@ -34,8 +32,11 @@ function App() {
                 <Route path="/about">
                   <About />
                 </Route>
+                <Route path="/recommender">
+                  <Recommender />
+                </Route>
                 <Route path="/">
-                  <Calculator />                
+                  <Predictor />                
                 </Route>
               </Switch>
             </bs.Card>

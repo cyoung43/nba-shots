@@ -15,7 +15,8 @@ function HeaderContainer(props) {
             <bs.Navbar.Toggle aria-controls="basic-Navbar-Nav" />
             <bs.Navbar.Collapse id="basic-Navbar-Nav">
                 <bs.Nav className="mr-auto">
-                    <Link to="/" className="nav-link">Calculator</Link>
+                    <Link to="/" className="nav-link">Predictor</Link>
+                    <Link to="/recommender" className="nav-link">Recommender</Link>
                     <Link to="/about" className="nav-link">About</Link>                
                 </bs.Nav>
                 <bs.Form inline>
