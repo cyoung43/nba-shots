@@ -114,7 +114,7 @@ function Predictor(props) {
                 // Put axios call to API here:
                 let calcResp
                 try {
-                    calcResp = await axios.post(`http://localhost:8000/api/getShotPrediction/`, JSON.stringify(dict))
+                    calcResp = await axios.post(`http://ec2-18-234-190-213.compute-1.amazonaws.com:8000/api/getShotPrediction/`, JSON.stringify(dict))
                 }
                 catch(err) {
                     console.log(err)
