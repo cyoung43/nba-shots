@@ -86,7 +86,7 @@ def getShotPrediction(request):
     cursor = cnxn.cursor()
 
     cursor.execute(
-        f"INSERT INTO Shot_Prediction(location, SHOT_NUMBER, PERIOD, SHOT_CLOCK, DRIBBLES, SHOT_DIST, PTS_TYPE, CLOSE_DEF_DIST, game_clock, FG, Experience, SHOT_RESULT, player_first, player_last) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", location, shot_number, period, shot_clock, dribbles, shot_distance, pts_type, close_def_dist, game_clock, fg, experience, shot_prediction, player_first, player_last)
+        "INSERT INTO Shot_Prediction(location, SHOT_NUMBER, PERIOD, SHOT_CLOCK, DRIBBLES, SHOT_DIST, PTS_TYPE, CLOSE_DEF_DIST, game_clock, FG, Experience, SHOT_RESULT, player_first, player_last) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", location, shot_number, period, shot_clock, dribbles, shot_distance, pts_type, close_def_dist, game_clock, fg, experience, shot_prediction, player_first, player_last)
 
     # cnxn.commit()
     cursor.close()
