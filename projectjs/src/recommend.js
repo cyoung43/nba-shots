@@ -93,9 +93,29 @@ const CalculatorForm = props => (
                 </bs.Col>
             </bs.Row>
             <bs.Row className="mb-4">
-                <bs.Col>
+                <bs.Col md="3"/>
+                <bs.Col md="6" className="text-center">
                     <h1>Results Here</h1>
+                    <bs.Table striped bordered hover variant="dark">
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Kevin Durant</td>
+                            </tr>
+                            <tr>
+                                <td>Steph Curry</td>
+                            </tr>
+                            <tr>
+                                <td>Donovan Mitchell</td>
+                            </tr>
+                        </tbody>
+                    </bs.Table>
                 </bs.Col>
+                <bs.Col md="3"/>
             </bs.Row>
         </Form>       
     </bs.Container>
